@@ -2,15 +2,17 @@
   apt_key:
     url: "{{jenkins_repo_url}}"
     state: present
+
 - name: ensure repo is configured
   apt_repository:
     repo: 'deb http://pkg.jenkins.io/debian-stable binary/'
     state: present
+
 - name: apt update
   apt: 
     update_cache: true
 
-- name: apt update & install openjdk-8-jdk
+- name: install jdk
   apt:
     name: "{{java_version}}"
 
