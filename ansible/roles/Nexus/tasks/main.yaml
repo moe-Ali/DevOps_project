@@ -1,0 +1,63 @@
+- name: apt update & install wget
+  apt:
+    name: wget
+    update_cache: true
+
+- name: install java
+  apt:
+    name: openjdk-8-jdk
+
+- name: Download the latest nexus
+  get_url:
+    url: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+    dest: "/opt/nexus.tar.gz"
+
+- name: Untar the downloaded file
+  unarchive:
+    remote_src: true
+    src: "/opt/nexus.tar.gz"
+    dest: "/opt"
+
+# - name: Check if file exists
+#   stat:
+#     path: "{{ rename_src }}"
+#   register: check_file_name
+
+- name: Copy file with new name
+  copy:
+    remote_src: true
+    src: "{{ rename_src }}"
+    dest: "{{ rename_dest }}"
+  # when: check_file_name.stat.exists
+
+- name: Remove old file
+  file:
+    path: "{{ rename_src }}"
+    state: absent
+  # when: check_file_name.stat.exists
+  
+- name: add user nexus
+  user:
+    name: nexus
+
+- name: change owner of nexus
+  shell: "chown -R nexus:nexus /opt/nexus; chown -R nexus:nexus /opt/sonatype-work"
+
+- name: change in nexus file
+  lineinfile:
+    path: /opt/nexus/bin/nexus.rc
+    regex: '^#run_as_user'
+    line: 'run_as_user="nexus"'
+    backrefs: true
+
+- name: copy service file
+  copy:
+    src: nexus.service
+    dest: "{{service_file}}"
+
+- name: restart the service
+  service:
+    state: started
+    name: nexus
+    enabled: true
+    

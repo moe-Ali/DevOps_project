@@ -1,0 +1,3 @@
+postgres_version: 14
+postgres_password: postgres
+sonar_password: admin
