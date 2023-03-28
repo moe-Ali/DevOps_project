@@ -8,8 +8,8 @@ pipeline {
     }
 
     environment {
-        NEXUS_USER = 'admin'
-        NEXUS_PASS ='123'
+        NEXUS_USER = ''
+        NEXUS_PASS = ''
         RELEASE_REPO = 'devops_project-release'
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
@@ -23,7 +23,17 @@ pipeline {
     }
 	
     stages{
-        
+        stage('Set environment variable') {
+            steps {
+                // to set out nexus username and password as environment variables without showing them in the code #security
+                withCredentials([usernamePassword(credentialsId: 'nexuslogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    script {
+                        env.NEXUS_USER = sh(script: 'echo $USERNAME', returnStdout: true).trim()
+                        env.NEXUS_PASS = sh(script: 'echo $PASSWORD', returnStdout: true).trim()
+                    }
+                }
+            }
+        }
         stage("BUILD"){
             steps {
                 sh 'mvn -s settings.xml -DskipTests install'
