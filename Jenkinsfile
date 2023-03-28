@@ -18,7 +18,7 @@ pipeline {
         NEXUS_GRP_REPO = 'devops_project-group'
         NEXUS_LOGIN = 'nexuslogin' // nexus login credential name on jenkins
         SONARSERVER = 'sonarserver' 
-        SONARSCANNER = 'sonarscaner'
+        SONARSCANNER = 'sonarscanner'
 
     }
 	
