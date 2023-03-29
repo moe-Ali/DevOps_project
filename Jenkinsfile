@@ -81,7 +81,7 @@ pipeline {
                 groupId: 'QA',
                 version: "${BUILD_ID}-${BUILD_TIMESTAMP}",
                 repository: "${RELEASE_REPO}",
-                credentialsId: ${NEXUS_LOGIN},
+                credentialsId: "${NEXUS_LOGIN}",
                 artifacts: [
                     [artifactId: 'vproapp' ,
                     classifier: '',
