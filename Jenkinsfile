@@ -66,14 +66,6 @@ pipeline {
                 }
             }
         }
-        post{
-            faliure{
-                slackSend (channel:"jenkins", color:"#FF000", messege:"FAILED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
-            }
-            success{
-                slackSend (channel:"jenkins", color:"#FF000", messege:"SUCCEEDED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
-            }
-        }
         stage('QUALITY GATE') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
@@ -99,6 +91,14 @@ pipeline {
                     ]
                 )
             }
+        }
+    }
+    post{
+        faliure{
+            slackSend (channel:"jenkins", color:"#FF000", messege:"FAILED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
+        }
+        success{
+            slackSend (channel:"jenkins", color:"#FF000", messege:"SUCCEEDED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
         }
     }
 }
