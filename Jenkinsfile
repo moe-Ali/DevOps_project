@@ -95,13 +95,13 @@ pipeline {
     }
     post{
         failure{
-            slackSend (channel:"jenkins", color:"#FF000", messege:"FAILED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
+            slackSend (channel:"jenkins", color:"#FF000", message:"FAILED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
         }
         success{
-            slackSend (channel:"jenkins", color:"#FF000", messege:"SUCCEEDED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
+            slackSend (channel:"jenkins", color:"#FF000", message:"SUCCEEDED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
         }
         aborted{
-            slackSend (channel:"jenkins", color:"#FF000", messege:"ABORTED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
+            slackSend (channel:"jenkins", color:"#FF000", message:"ABORTED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
         }
     }
 }
