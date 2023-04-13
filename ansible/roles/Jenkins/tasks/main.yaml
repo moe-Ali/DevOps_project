@@ -29,3 +29,16 @@
   file:
     path: /var/run/docker.sock
     mode: "0666"
+
+- name: Install Jenkins Plugin Installation Manager
+  get_url:
+    url: https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.12.11/jenkins-plugin-manager-2.12.11.jar
+    dest: /opt/
+
+- name: Copy plugins.txt file 
+  copy:
+    src: plugins.txt
+    dest: /opt/plugins.txt
+    
+- name: install jenkins plugins
+  shell: java -jar jenkins-plugin-manager-*.jar --war /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f /opt/plugins.txt
