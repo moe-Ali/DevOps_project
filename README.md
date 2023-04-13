@@ -6,7 +6,7 @@
 # Prequsits
 - awscli configured
 - Python, Terraofmr and Ansible installed
-- GitHub account
+- GitHub and DockerHub account
 - Slack account with namespace that has Jenkins CI configured in it 
 #### [To configure Jenkins CI on slack](https://slack.com/apps/A0F7VRFKN-jenkins-ci)
 ## Jenkins Plugins:
@@ -36,6 +36,7 @@ Note: Python script will output jenkins password and nexus password after the in
     - githublogin => type: ssh username with privatekey
     - sonartoken => type: secret text
     - slacktoken => type: secret text
+    - dockerlogin => type: username with password
 - Configure Global tools:
     - JDK => Name: JDK_8 , JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
     - SonarQube Scanner => Name: sonarscanner , check mark "Install automatically"
