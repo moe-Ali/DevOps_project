@@ -23,7 +23,7 @@ cd DevOps_project
 python main.py
 ```
 Note: Python script will output jenkins password and nexus password after the infrastructure is built and configured
-on Jenkins:
+#### on Jenkins:
 - sign in using the password that the python script outputed
 - Create Credentials:
     - nexuslogin => type: username with password
@@ -37,7 +37,7 @@ on Jenkins:
 - Configure System:
     - SonarQube servers => check mark "Environment variables" , Name: sonarserver , Server URL: http://{your sonarqube server ip}:9000 , Server authentication token: sonartoken
 - Create Pipeline and check mark "GitHub hook trigger for GITScm polling", choose the pipeline to be from SCM, then fork my repo branch ci and use it as Repository URL
-on Nexus:
+#### on Nexus:
 - sign in using username admin and password that the python script outputed
 - go to conigration then select repository:
     - Create repository Maven2 (hosted) and name it devops_project-release
@@ -45,7 +45,7 @@ on Nexus:
     - Create repository Maven2 (proxy) and name it devops_project-central
     - Create repository Maven2 (group) and name it devops_project-group and add devops_project-release, devops_project-snapshot, devops_project-central
 run the pipeline manauly, it will abort due to a SonarQube webhook not being configured
-on SonarQube:
+#### on SonarQube:
 - From projects select devops_project
 - From project settings select configure webhook then create a webhook with anyname and the url: http://{your jenkins private ip}:8080/sonarqube-webhook
 
