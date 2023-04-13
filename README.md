@@ -3,6 +3,11 @@
 ## infrastructure on AWS
 ![aws_infra](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/aws_public.png)
 
+# Prequsits
+- awscli configured
+- github account
+- slack account with namespace that has Jenkins CI configured in it
+**to configure Jenkins CI** https://slack.com/apps/A0F7VRFKN-jenkins-ci
 ## Jenkins Plugins:
 Note: this plugins is installed using Plugin Installation Manager by Ansible inside the python code
 - Maven Integration plugin
@@ -35,6 +40,7 @@ Note: Python script will output jenkins password and nexus password after the in
     - SonarQube Scanner => Name: sonarscanner , check mark "Install automatically"
     - Maven => Name: maven_3.9.1 , check mark "Install automatically"
 - Configure System:
+    - Slack => Workspace: the workspace that has Jenkins CI , Credential: slacktoken , Default channel: the channel selected for Jenkins CI
     - SonarQube servers => check mark "Environment variables" , Name: sonarserver , Server URL: http://{your sonarqube server ip}:9000 , Server authentication token: sonartoken
 - Create Pipeline and check mark "GitHub hook trigger for GITScm polling", choose the pipeline to be from SCM, then fork my repo branch ci and use it as Repository URL
 #### on Nexus:
@@ -44,7 +50,8 @@ Note: Python script will output jenkins password and nexus password after the in
     - Create repository Maven2 (hosted) and name it devops_project-snapshot
     - Create repository Maven2 (proxy) and name it devops_project-central
     - Create repository Maven2 (group) and name it devops_project-group and add devops_project-release, devops_project-snapshot, devops_project-central
-run the pipeline manauly, it will abort due to a SonarQube webhook not being configured
+
+#### run the pipeline manauly, it will abort due to a SonarQube webhook not being configured
 #### on SonarQube:
 - From projects select devops_project
 - From project settings select configure webhook then create a webhook with anyname and the url: http://{your jenkins private ip}:8080/sonarqube-webhook
