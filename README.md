@@ -1,7 +1,7 @@
 # DevOps_project
 
 ## infrastructure on AWS
-![aws_infra]()
+![aws_infra](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/aws_public.png)
 
 ## Jenkins Plugins:
 Note: this plugins is installed using Plugin Installation Manager by Ansible inside the python code
