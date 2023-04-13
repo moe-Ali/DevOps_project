@@ -5,6 +5,7 @@
 
 # Prequsits
 - awscli configured
+- Python, Terraofmr and Ansible installed
 - GitHub account
 - Slack account with namespace that has Jenkins CI configured in it 
 #### [To configure Jenkins CI on slack](https://slack.com/apps/A0F7VRFKN-jenkins-ci)
