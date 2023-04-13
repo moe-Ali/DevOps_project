@@ -16,7 +16,7 @@ pipeline {
         NEXUS_GRP_REPO = 'devops_project-group'
         NEXUSIP = '192.168.52.132'
         NEXUSPORT= '8081'
-        NEXUS_LOGIN = 'nexuslogin' // nexus login credential name on jenkins
+        NEXUS_LOGIN = 'nexuslogin' 
         SONARSERVER = 'sonarserver' 
         SONARSCANNER = 'sonarscanner'
 
