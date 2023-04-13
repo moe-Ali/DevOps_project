@@ -57,5 +57,6 @@ Note: Python script will output jenkins password and nexus password after the in
 - From projects select devops_project
 - From project settings select configure webhook then create a webhook with anyname and the url: http://{your jenkins private ip}:8080/sonarqube-webhook
 
-on github create a webhook from the forked repo to your jenkins ip
+#### on github 
+- create a webhook from the forked repo to your jenkins ip
 
