@@ -13,9 +13,9 @@ pipeline {
         RELEASE_REPO = 'devops_project-release'
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
+        NEXUS_GRP_REPO = 'devops_project-group'
         NEXUSIP = '192.168.52.132'
         NEXUSPORT= '8081'
-        NEXUS_GRP_REPO = 'devops_project-group'
         NEXUS_LOGIN = 'nexuslogin' // nexus login credential name on jenkins
         SONARSERVER = 'sonarserver' 
         SONARSCANNER = 'sonarscanner'
@@ -73,25 +73,25 @@ pipeline {
                 }
             }
         }
-    //     stage('ARTIFACT UPLOAD') {
-    //         steps{
-    //             nexusArtifactUploader(
-    //                 nexusVersion: 'nexus3',
-    //                 protocol: 'http',
-    //                 nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
-    //                 groupId: 'QA',
-    //                 version: "${BUILD_ID}-${BUILD_TIMESTAMP}",
-    //                 repository: "${RELEASE_REPO}",
-    //                 credentialsId: "${NEXUS_LOGIN}",
-    //                 artifacts: [
-    //                     [artifactId: 'vproapp' ,
-    //                     classifier: '',
-    //                     file: 'target/vprofile-v2.war',
-    //                     type: 'war']
-    //                 ]
-    //             )
-    //         }
-    //     }
+        stage('ARTIFACT UPLOAD') {
+            steps{
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
+                    groupId: 'QA',
+                    version: "${BUILD_ID}-${BUILD_TIMESTAMP}",
+                    repository: "${RELEASE_REPO}",
+                    credentialsId: "${NEXUS_LOGIN}",
+                    artifacts: [
+                        [artifactId: 'vproapp' ,
+                        classifier: '',
+                        file: 'target/vprofile-v2.war',
+                        type: 'war']
+                    ]
+                )
+            }
+        }
     }
     post{
         failure{
