@@ -92,31 +92,30 @@ pipeline {
                 )
             }
         }
-    }
 
-    stage('CONTAINER BUILD') {
-      steps {
-        echo "This is build stage number ${BUILD_NUMBER}"
-        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        sh """
-            docker login --username ${USERNAME} --password ${PASSWORD}
-            docker build -t ${USERNAME}/devops_project:${BUILD_NUMBER} .
-        """
+        stage('CONTAINER BUILD') {
+            steps {
+                echo "This is build stage number ${BUILD_NUMBER}"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                sh """
+                    docker login --username ${USERNAME} --password ${PASSWORD}
+                    docker build -t ${USERNAME}/devops_project:${BUILD_NUMBER} .
+                """
+                }
+            }
         }
-      }
-    }
-    stage('CONTAINER PUSH') {
-      steps {
-        echo "This is push stage number ${BUILD_NUMBER}"
-        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        sh """
-            docker push ${USERNAME}/devops_project:${BUILD_NUMBER}
-            echo ${BUILD_NUMBER} > ../push_number.txt
-        """
+        stage('CONTAINER PUSH') {
+            steps {
+                echo "This is push stage number ${BUILD_NUMBER}"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                sh """
+                    docker push ${USERNAME}/devops_project:${BUILD_NUMBER}
+                    echo ${BUILD_NUMBER} > ../push_number.txt
+                """
+                }
+            }
         }
-      }
     }
-
     post{
         failure{
             slackSend (channel:"jenkins", color:"#FF0000", message:"FAILED: job '${JOB_NAME} [${BUILD_ID}]' (${BUILD_URL})")
