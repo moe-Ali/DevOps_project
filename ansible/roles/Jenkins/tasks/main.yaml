@@ -1,27 +1,31 @@
-- name: Add Jenkins Repository
-  apt_key:
-    url: "{{jenkins_repo_url}}"
-    state: present
+- name: Add Jenkins key
+  get_url:
+    url:  "{{ jenkins_repo_url }}"
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+  register: jenkins_key
 
-- name: ensure repo is configured
-  apt_repository:
-    repo: 'deb http://pkg.jenkins.io/debian-stable binary/'
-    state: present
+- name: Touch a file
+  file:
+    path: /etc/apt/sources.list.d/jenkins.list
+    state: touch
 
-- name: apt update
+- name: Add Jenkins repository
+  shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+  when: jenkins_key.changed
+
+- name: Apt update
   apt: 
     update_cache: true
 
-- name: install jdk
+- name: Apt install
   apt:
-    name: "{{java_version}}"
+    name: "{{apt_install}}"
 
-- name: install jenkins 
+- name: Install jenkins 
   apt:
-    name: jenkins 
-
-- name: start jenkins service
-  service:
     name: jenkins
-    enabled: true
-    state: started
+
+- name: Set permissions for /var/run/docker.sock
+  file:
+    path: /var/run/docker.sock
+    mode: "0666"

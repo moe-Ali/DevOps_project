@@ -57,6 +57,15 @@ def get_jenkins_passwod():
     print("Jenkins initialAdminPassword:")
     subprocess.run(["ssh","-i","devops_project.pem","ubuntu@{}".format(password[1]),"sudo","cat","/var/lib/jenkins/secrets/initialAdminPassword"],cwd="./keypair")
 
+def get_nexus_passwod():
+    with open('./ansible/inventory', 'r') as file:
+        lines = file.readlines()
+    for line in lines:
+        if "nexus_server" in line:
+            password = re.search("ansible_host=([0-9\.]*)",line)
+    print("Nexus admin password:")
+    subprocess.run(["ssh","-i","devops_project.pem","ubuntu@{}".format(password[1]),"sudo","cat","/opt/sonatype-work/nexus3/admin.password"],cwd="./keypair")
+
 def main():
     print("Choose a number\nOptions:",
           """
@@ -77,6 +86,7 @@ def main():
         terraform_apply()
         ansible_start()
         get_jenkins_passwod()
+        get_nexus_passwod()
     else:
         print("Please make sure to Enter on of this numbers [1,2,3,4]")
         main()

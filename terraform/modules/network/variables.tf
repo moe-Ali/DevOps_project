@@ -8,14 +8,20 @@ variable "vpc_cidr" {
 }
 
 #Subnets
-variable "public_subnet" {
-  type=object({
+#Subnet
+variable network_subnets{
+    type=map(object({
         cidr = string
         az = string
-  })
+        map_ip = bool
+        route_table = string
+    }))
 }
 
 #route table
-variable "rt_public_cidr" {
-    type= string
+variable network_route_table{
+    type=map(object({
+        cidr = string
+        gateway_id = string
+    }))
 }

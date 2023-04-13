@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   roles:
-    # - { role: roles/Jenkins, when: inventory_hostname == "jenkins_server"}
+    - { role: roles/Jenkins, when: inventory_hostname == "jenkins_server"}
     - { role: roles/Nexus, when: inventory_hostname == "nexus_server"}
-    # - { role: roles/PostgreSQL, when: inventory_hostname == "sonarqube_server"}
-    # - { role: roles/SonarQube, when: inventory_hostname == "sonarqube_server"}
+    - { role: roles/PostgreSQL, when: inventory_hostname == "sonarqube_server"}
+    - { role: roles/SonarQube, when: inventory_hostname == "sonarqube_server"}
