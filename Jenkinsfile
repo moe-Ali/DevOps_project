@@ -75,15 +75,19 @@ pipeline {
                     repository: "${RELEASE_REPO}",
                     credentialsId: "${NEXUS_LOGIN}",
                     artifacts: [
-                        [artifactId: 'vproapp' ,
+                        [artifactId: 'devops_project' ,
                         classifier: '',
-                        file: 'target/vprofile-v2.war',
+                        file: 'target/devops_project.war',
                         type: 'war']
                     ]
                 )
             }
         }
-
+        stage('TEST') {
+            steps {
+                echo "testtestesttest ${NEXUS_USER}"
+            }
+        }
         stage('CONTAINER BUILD') {
             steps {
                 echo "This is build stage number ${BUILD_NUMBER}"
