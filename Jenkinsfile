@@ -31,7 +31,7 @@ pipeline {
                     script {
                         env.NEXUS_USER = sh(script: 'echo $USERNAME', returnStdout: true).trim()
                         env.NEXUS_PASS = sh(script: 'echo $PASSWORD', returnStdout: true).trim()
-                        echo "${NEXUS_USER}"
+                        echo "${env.NEXUS_USER}"
                     }
                 }
             }
