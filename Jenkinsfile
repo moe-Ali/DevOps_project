@@ -85,7 +85,7 @@ pipeline {
         }
         stage('TEST') {
             steps {
-                echo "testtestesttest ${NEXUS_USER}"
+                echo "testtestesttest ${env.NEXUS_USER}"
             }
         }
         stage('CONTAINER BUILD') {
