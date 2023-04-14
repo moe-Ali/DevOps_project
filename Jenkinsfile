@@ -8,8 +8,6 @@ pipeline {
     }
 
     environment {
-        NEXUS_USER = ''
-        NEXUS_PASS = ''
         RELEASE_REPO = 'devops_project-release'
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
@@ -24,18 +22,6 @@ pipeline {
     }
 	
     stages{
-        stage('Set environment variable') {
-            steps {
-                // to set out nexus username and password as environment variables without showing them in the code #security
-                withCredentials([usernamePassword(credentialsId: 'nexuslogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    script {
-                        env.NEXUS_USER = sh(script: 'echo $USERNAME', returnStdout: true).trim()
-                        env.NEXUS_PASS = sh(script: 'echo $PASSWORD', returnStdout: true).trim()
-                        echo "${env.NEXUS_USER}"
-                    }
-                }
-            }
-        }
         stage("BUILD"){
             steps {
                 sh 'mvn -DskipTests install'
@@ -84,26 +70,25 @@ pipeline {
                 )
             }
         }
-        stage('TEST') {
-            steps {
-                echo "${NEXUS_USER}"
-            }
-        }
         stage('CONTAINER BUILD') {
             steps {
                 echo "This is build stage number ${BUILD_NUMBER}"
+                withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
-                    docker login --username ${NEXUS_USER} --password ${NEXUS_PASS} http://${NEXUSIP}:${DOCKER_NEXUS_PORT}
+                    docker login --username ${NEXUS_USER} --password ${NEXUS_PASSWORD} http://${NEXUSIP}:${DOCKER_NEXUS_PORT}
                     docker build -t ${NEXUS_USER}/devops_project:${BUILD_NUMBER} .
                 """
+                }
             }
         }
         stage('CONTAINER PUSH') {
             steps {
+                withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
                     docker push ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER}
                     echo ${BUILD_NUMBER} > ../push_number.txt
                 """
+                }
             }
         }
     }
