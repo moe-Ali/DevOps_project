@@ -31,6 +31,7 @@ pipeline {
                     script {
                         env.NEXUS_USER = sh(script: 'echo $USERNAME', returnStdout: true).trim()
                         env.NEXUS_PASS = sh(script: 'echo $PASSWORD', returnStdout: true).trim()
+                        echo "${NEXUS_USER}"
                     }
                 }
             }
@@ -85,7 +86,7 @@ pipeline {
         }
         stage('TEST') {
             steps {
-                echo "testtestesttest ${NEXUS_LOGIN}"
+                echo "${NEXUS_USER}"
             }
         }
         stage('CONTAINER BUILD') {
