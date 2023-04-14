@@ -25,11 +25,11 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.11</version>
     </dependency>
-    <dependency>
+    <!-- <dependency>
       <groupId>com.example</groupId>
       <artifactId>my-library</artifactId>
       <version>LATEST</version>
-    </dependency>
+    </dependency> -->
   </dependencies>
   <build>
     <finalName>devops_project</finalName>
