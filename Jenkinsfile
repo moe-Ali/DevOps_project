@@ -18,7 +18,6 @@ pipeline {
         NEXUS_LOGIN = 'nexuslogin' 
         SONARSERVER = 'sonarserver' 
         SONARSCANNER = 'sonarscanner'
-
     }
 	
     stages{
@@ -76,7 +75,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
                     docker login --username ${NEXUS_USER} --password ${NEXUS_PASSWORD} http://${NEXUSIP}:${DOCKER_NEXUS_PORT}
-                    docker build -t ${NEXUS_USER}/devops_project:${BUILD_NUMBER} .
+                    docker build -t ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER} .
                 """
                 }
             }
