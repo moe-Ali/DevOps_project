@@ -16,6 +16,7 @@ pipeline {
         NEXUS_GRP_REPO = 'devops_project-group'
         NEXUSIP = '192.168.52.132'
         NEXUSPORT= '8081'
+        DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
         SONARSERVER = 'sonarserver' 
         SONARSCANNER = 'sonarscanner'
@@ -86,23 +87,18 @@ pipeline {
         stage('CONTAINER BUILD') {
             steps {
                 echo "This is build stage number ${BUILD_NUMBER}"
-                withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh """
-                    docker login --username ${USERNAME} --password ${PASSWORD}
-                    docker build -t ${USERNAME}/devops_project:${BUILD_NUMBER} .
+                    docker login --username ${NEXUS_USER} --password ${NEXUS_PASS} http://${NEXUSIP}:${DOCKER_NEXUS_PORT}
+                    docker build -t ${NEXUS_USER}/devops_project:${BUILD_NUMBER} .
                 """
-                }
             }
         }
         stage('CONTAINER PUSH') {
             steps {
-                echo "This is push stage number ${BUILD_NUMBER}"
-                withCredentials([usernamePassword(credentialsId: 'dockerhublogin', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                 sh """
-                    docker push ${USERNAME}/devops_project:${BUILD_NUMBER}
+                    docker push ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER}
                     echo ${BUILD_NUMBER} > ../push_number.txt
                 """
-                }
             }
         }
     }
