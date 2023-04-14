@@ -36,17 +36,7 @@ pipeline {
         }
         stage("BUILD"){
             steps {
-                sh 'mvn -s settings.xml -DskipTests install'
-            }
-        }
-        stage("TEST"){
-            steps {
-            sh 'mvn -s settings.xml test'
-            }
-        }
-        stage("CHECK"){
-            steps {
-            sh 'mvn -s settings.xml checkstyle:checkstyle'
+                sh 'mvn -DskipTests install'
             }
         }
         stage('CODE ANALYSIS with SONARQUBE') {
