@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('SETUP Kubectl'){
         steps {
-            withCredentials([usernamePassword(credentialsId: "aws", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+            withCredentials([usernamePassword(credentialsId: "awslogin", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh """
                 aws s3 ls
                 """
