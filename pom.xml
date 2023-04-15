@@ -25,11 +25,30 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.11</version>
     </dependency>
-    <!-- <dependency>
-      <groupId>com.example</groupId>
-      <artifactId>my-library</artifactId>
-      <version>LATEST</version>
-    </dependency> -->
+    <dependencies>
+    <!-- JUnit Jupiter API for unit testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- JUnit Jupiter Engine for running unit tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Mockito for mocking objects in unit tests -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.12.4</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>devops_project</finalName>
