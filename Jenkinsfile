@@ -6,10 +6,12 @@ pipeline {
   }
   stages {
     stage('SETUP Kubectl'){
-        withCredentials([usernamePassword(credentialsId: "aws", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-            sh """
-            aws s3 ls
-            """
+        steps {
+            withCredentials([usernamePassword(credentialsId: "aws", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh """
+                aws s3 ls
+                """
+            }
         }
     }
     // stage('Deploy APP') {
