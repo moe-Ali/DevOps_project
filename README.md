@@ -6,7 +6,7 @@
 # Prequsits
 - awscli configured
 - Python, Terraofmr and Ansible installed
-- GitHub and DockerHub account
+- GitHub account
 - Slack account with namespace that has Jenkins CI configured in it 
 #### [To configure Jenkins CI on slack](https://slack.com/apps/A0F7VRFKN-jenkins-ci)
 ## Jenkins Plugins:
@@ -44,6 +44,7 @@ Note: Python script will output jenkins password and nexus password after the in
 - Configure System:
     - Slack => Workspace: the workspace that has Jenkins CI , Credential: slacktoken , Default channel: the channel selected for Jenkins CI
     - SonarQube servers => check mark "Environment variables" , Name: sonarserver , Server URL: http://{your sonarqube server ip}:9000 , Server authentication token: sonartoken
+- Change the Variables in the Jenkinsfile (specially the NEXUSIP)
 - Create Pipeline and check mark "GitHub hook trigger for GITScm polling", choose the pipeline to be from SCM, then fork my repo branch ci and use it as Repository URL
 #### on Nexus:
 - sign in using username admin and password that the python script outputed
@@ -52,6 +53,7 @@ Note: Python script will output jenkins password and nexus password after the in
     - Create repository Maven2 (hosted) and name it devops_project-snapshot
     - Create repository Maven2 (proxy) and name it devops_project-central
     - Create repository Maven2 (group) and name it devops_project-group and add devops_project-release, devops_project-snapshot, devops_project-central
+    - Create repository Docker (hosterd) and name it anything and make it accessible on HTTP port 5000
 
 #### run the pipeline manauly, it will abort due to a SonarQube webhook not being configured
 #### on SonarQube:
