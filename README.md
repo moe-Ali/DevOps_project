@@ -32,11 +32,11 @@ Note: Python script will output jenkins password and nexus password after the in
 #### on Jenkins:
 - sign in using the password that the python script outputed
 - Create Credentials:
-    - nexuslogin => type: username with password
+    - awslogin => type: username with password
     - githublogin => type: ssh username with privatekey
     - sonartoken => type: secret text
+    - nexuslogin => type: username with password
     - slacktoken => type: secret text
-    - dockerlogin => type: username with password
 - Configure Global tools:
     - JDK => Name: JDK_8 , JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-amd64
     - SonarQube Scanner => Name: sonarscanner , check mark "Install automatically"
