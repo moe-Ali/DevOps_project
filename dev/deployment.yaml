@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java_app_service
+  namespace: java_app
+spec:
+  selector:
+    matchLabels:
+      app: java_app
+  template:
+    metadata:
+      labels:
+        app: java_app
+    spec:
+      containers:
+      - name: java_app
+        image: 192.168.52.132:5000/devops_project:54
+        resources:
+          limits: {}
+        ports:
+        - containerPort: 8080
