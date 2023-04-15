@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "$K8S_READY" -ne 1 ]; then
-export K8S_READY=1
-echo not equal to 1
+if [ -z "$K8S_READY" ];then
+    export K8S_READY="no"
+    echo "not equal"
 fi

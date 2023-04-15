@@ -30,7 +30,7 @@ pipeline {
         steps {
             sh """
             chmod +x script.sh
-            bash script.sh
+            . script.sh
             """
         }
     }
