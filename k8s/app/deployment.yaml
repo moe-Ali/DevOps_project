@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: java_app_service
-  namespace: java_app
 spec:
   selector:
     matchLabels:
@@ -14,7 +13,7 @@ spec:
     spec:
       containers:
       - name: java_app
-        image: 192.168.52.132:5000/devops_project:54
+        image: 192.168.52.132:5000/devops_project:${BUILD_NUMBER}
         resources:
           limits: {}
         ports:

@@ -1,0 +1,23 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-argo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/moe-Ali/Argocd.git
+    targetRevision: cd
+    path: k8s/app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: java_app
+  
+  syncPolicy:
+    syncOptions: 
+    - CreateNamespace=true #to create a namespace if it doesnt exists
+
+    automated:
+      selfHeal: true #to automaticaly sync when a change happens to the git repo (desired state)
+      prune: true # to remove resources from the k8s cluster that are not in the git repo
