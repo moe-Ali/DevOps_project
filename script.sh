@@ -1,7 +1,7 @@
 #!/bin/bash
-if [ -e k8s_ready ];then
+if [ -f k8s_ready ];then
+    echo "ready"
+else
     echo "not ready"
     touch k8s_ready
-else
-    echo "ready"
 fi
