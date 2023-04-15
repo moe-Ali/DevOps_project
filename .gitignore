@@ -1,3 +1,0 @@
-# ignore local terraform init
-**/.terraform/*
-**/*.pem

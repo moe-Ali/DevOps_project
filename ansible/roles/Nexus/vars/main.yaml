@@ -1,4 +1,0 @@
-home_dir: /home/ubuntu
-rename_src: /opt/nexus-3.51.0-01/
-rename_dest: /opt/nexus
-service_file: /etc/systemd/system/nexus.service

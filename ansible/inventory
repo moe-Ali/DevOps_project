@@ -1,3 +1,0 @@
-jenkins_server ansible_host=192.168.52.132 ansible_user=root ansible_password=123
-nexus_server ansible_host=192.168.52.132 ansible_user=root ansible_password=123
-sonarqube_server ansible_host=192.168.52.132 ansible_user=root ansible_password=123

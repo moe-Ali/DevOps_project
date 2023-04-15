@@ -1,6 +1,0 @@
-maven-plugin
-jdk-tool
-sonar
-nexus-artifact-uploader
-slack
-build-timestamp
