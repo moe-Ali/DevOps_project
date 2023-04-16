@@ -5,6 +5,7 @@ pipeline {
     AWS_DEFAULT_REGION= "us-east-1"
     GIT_URL= "github.com/moe-Ali/DevOps_project.git"
     GIT_EMAIL = "mohamd1234505@outlook.com"
+    GIT_BRANCH = "cd"
   }
   stages {
     // stage('SETUP Kubectl'){
@@ -29,7 +30,7 @@ pipeline {
           git config --global user.name ${GIT_USER}
           git add .
           git commit -m "Edited by Jenkins pipeline ${BUILD_NUMBER}"
-          git push https://${GIT_USER}:${GIT_PASSWORD}@${GIT_URL}
+          git push https://${GIT_USER}:${GIT_PASSWORD}@${GIT_URL} HEAD:${GIT_BRANCH}
           """
         }
       }
