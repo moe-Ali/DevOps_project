@@ -18,9 +18,13 @@ pipeline {
       steps {
         sh """
         export BUILD_NUMBER=\$(cat ../push_number.txt)
-        mv k8s/app/deployment.yaml k8s/app/deployment.yaml.tmp
+        [ -e "k8s/app/deployment.yaml" ] && rm -f "k8s/app/deployment.yaml"
+        cp k8s/deployment_jenkins.yaml k8s/app/deployment.yaml.tmp
         cat k8s/app/deployment.yaml.tmp | envsubst > k8s/app/deployment.yaml
         rm -f k8s/app/deployment.yaml.tmp
+        git add .
+        git commit -m "Edited by Jenkins pipeline ${BUILD_NUMBER}"
+        git push
         """
       }
     }
