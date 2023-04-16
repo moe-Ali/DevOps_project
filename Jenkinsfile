@@ -14,18 +14,16 @@ pipeline {
     //         }
     //     }
     // }
-    // stage('Configure App Deployment') {
-    //   steps {
-    //     sh """
-    //     export BUILD_NUMBER=\$(cat ../push_number.txt)
-    //     mv k8s/app/deployment.yaml k8s/app/deployment.yaml.tmp
-    //     cat k8s/app/deployment.yaml.tmp | envsubst > k8s/app/deployment.yaml
-    //     rm -f k8s/app/deployment.yaml.tmp
-    //     [ -d /tmp/k8s ] && rm -r /tmp/k8s
-    //     mv ./k8s  /tmp/
-    //     """
-    //   }
-    // }
+    stage('Configure App Deployment') {
+      steps {
+        sh """
+        export BUILD_NUMBER=\$(cat ../push_number.txt)
+        mv k8s/app/deployment.yaml k8s/app/deployment.yaml.tmp
+        cat k8s/app/deployment.yaml.tmp | envsubst > k8s/app/deployment.yaml
+        rm -f k8s/app/deployment.yaml.tmp
+        """
+      }
+    }
     stage('Install ArgoCD Prometheusand Gerafana') {
         steps {
             sh """
