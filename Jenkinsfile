@@ -8,15 +8,15 @@ pipeline {
     GIT_BRANCH = "cd"
   }
   stages {
-    // stage('SETUP Kubectl'){
-    //     steps {
-    //         withCredentials([usernamePassword(credentialsId: "awslogin", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-    //             sh """
-    //             aws eks update-kubeconfig --region us-east-1 --name DevOps_project-cluster
-    //             """
-    //         }
-    //     }
-    // }
+    stage('SETUP Kubectl'){
+        steps {
+            withCredentials([usernamePassword(credentialsId: "awslogin", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh """
+                aws eks update-kubeconfig --region us-east-1 --name DevOps_project-cluster
+                """
+            }
+        }
+    }
     stage('Configure App Deployment') {
       steps {
         withCredentials([usernamePassword(credentialsId: "githublogin", usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
