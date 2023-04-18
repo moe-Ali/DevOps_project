@@ -41,7 +41,13 @@
     dest: /opt/plugins.txt
     
 - name: install jenkins plugins
-  shell: java -jar jenkins-plugin-manager-*.jar --war /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f /opt/plugins.txt
+  shell: java -jar /opt/jenkins-plugin-manager-*.jar --war /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f /opt/plugins.txt
 
+- name: restart the service
+  service:
+    state: restarted
+    name: jenkins.service 
+    enabled: true
+    
 - name: install helm
   shell: snap install helm --classic

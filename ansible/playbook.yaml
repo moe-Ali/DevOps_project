@@ -1,5 +1,5 @@
 - name: DevOps Project
-  # become: true
+  become: true
   hosts: all
   gather_facts: false
   roles:
