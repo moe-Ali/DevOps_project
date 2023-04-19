@@ -12,7 +12,7 @@ pipeline {
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
         NEXUS_GRP_REPO = 'devops_project-group'
-        NEXUSIP = '44.211.39.134'
+        NEXUSIP = '54.87.132.54'
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
@@ -59,6 +59,7 @@ pipeline {
         }
         stage('CONTAINER PUSH') {
             steps {
+                echo "This is push stage number ${BUILD_NUMBER}"
                 withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
                     docker push ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER}
