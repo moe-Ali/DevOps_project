@@ -38,7 +38,7 @@
     state: present
     password: "{{ postgres_password | password_hash('sha512')}}"
 
-- name: change the authentication to md5
+- name: change the authentication
   lineinfile:
     path: /etc/postgresql/{{postgres_version}}/main/pg_hba.conf
     regex: "^local.*postgres.*peer$"

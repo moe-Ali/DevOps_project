@@ -32,7 +32,7 @@
     line: "{{ item }}"
   loop: 
     - sonar.jdbc.username=sonar
-    - sonar.jdbc.password="{{ sonar_password }}"
+    - sonar.jdbc.password={{ sonar_password }}
     - sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
     - sonar.search.javaOpts=-Xmx512m -Xms512m -XX:MaxDirectMemorySize=256m -XX:+HeapDumpOnOutOfMemoryError
 

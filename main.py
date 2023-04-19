@@ -16,7 +16,7 @@ def get_public_ip():
             lines[line_number]=re.sub("cidr_blocks =\[.*\]", 'cidr_blocks =["{}/32"]'.format(ip.strip()), lines[line_number])     
     with open('./terraform/main.tf', 'w') as file:
         file.writelines(lines)
-        
+          
 def terraform_apply():
     print("\n!!Terraform Apply!!\n")
     get_public_ip()
@@ -53,19 +53,31 @@ def get_jenkins_passwod():
         lines = file.readlines()
     for line in lines:
         if "jenkins_server" in line:
-            password = re.search("ansible_host=([0-9\.]*)",line)
+            jenkins_ip = re.search("ansible_host=([0-9\.]*)",line)
     print("Jenkins initialAdminPassword:")
-    subprocess.run(["ssh","-i","devops_project.pem","ubuntu@{}".format(password[1]),"sudo","cat","/var/lib/jenkins/secrets/initialAdminPassword"],cwd="./keypair")
+    subprocess.run(["ssh","-i","devops_project.pem","ubuntu@{}".format(jenkins_ip[1]),"sudo","cat","/var/lib/jenkins/secrets/initialAdminPassword"],cwd="./keypair")
 
 def get_nexus_passwod():
     with open('./ansible/inventory', 'r') as file:
         lines = file.readlines()
     for line in lines:
         if "nexus_server" in line:
-            password = re.search("ansible_host=([0-9\.]*)",line)
+            nexus_ip = re.search("ansible_host=([0-9\.]*)",line)
     print("Nexus admin password:")
-    subprocess.run(["ssh","-i","devops_project.pem","ubuntu@{}".format(password[1]),"sudo","cat","/opt/sonatype-work/nexus3/admin.password"],cwd="./keypair")
+    subprocess.run(["ssh","-i","devops_project.pem","ubuntu@{}".format(nexus_ip[1]),"sudo","cat","/opt/sonatype-work/nexus3/admin.password"],cwd="./keypair")
 
+def get_server_ip():
+    with open('./ansible/inventory', 'r') as file:
+        lines = file.readlines()
+    for line in lines:
+        if "jenkins_server" in line:
+            jenkins_ip = re.search("ansible_host=([0-9\.]*)",line)
+        elif "nexus_server" in line:
+            nexus_ip = re.search("ansible_host=([0-9\.]*)",line)
+        elif "sonarqube_server" in line:
+            sonar_ip = re.search("ansible_host=([0-9\.]*)",line)
+    print("Jenkins server: {}:8080".format(jenkins_ip[1]),"Nexus server: {}:8081".format(nexus_ip[1]),"SonarQube server: {}:9000".format(sonar_ip[1]),sep=" ")
+            
 def main():
     print("Choose a number\nOptions:",
           """
@@ -85,6 +97,7 @@ def main():
     elif picked_number == "4":
         terraform_apply()
         ansible_start()
+        get_server_ip()
         get_jenkins_passwod()
         get_nexus_passwod()
     else:
