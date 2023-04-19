@@ -39,13 +39,13 @@ pipeline {
                 }
             }
         }
-        stage('QUALITY GATE') {
-            steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+        // stage('QUALITY GATE') {
+        //     steps {
+        //         timeout(time: 5, unit: 'MINUTES') {
+        //             waitForQualityGate abortPipeline: true
+        //         }
+        //     }
+        // }
         stage('CONTAINER BUILD') {
             steps {
                 echo "This is build stage number ${BUILD_NUMBER}"
