@@ -12,7 +12,7 @@ pipeline {
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
         NEXUS_GRP_REPO = 'devops_project-group'
-        NEXUSIP = '192.168.52.132'
+        NEXUSIP = '44.211.39.134'
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
