@@ -73,7 +73,7 @@ module "nexus_server" {
         sg_rules = {
           "port 22" = { type ="ingress",port ="22",protocol ="tcp",cidr_blocks =["197.53.3.97/32"]}
           "port 8081" = { type ="ingress",port ="8081",protocol ="tcp",cidr_blocks =[var.allow_ip]}
-          "port 5000" = { type ="ingress",port ="5000",protocol ="tcp",cidr_blocks =["0.0.0.0/0"]}
+          "port 5000" = { type ="ingress",port ="5000",protocol ="tcp",cidr_blocks =[var.vpc_id]}
           "egress all" = { type ="egress",port ="0",protocol ="-1",cidr_blocks =["0.0.0.0/0"]}
         }
 }

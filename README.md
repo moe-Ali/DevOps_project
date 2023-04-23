@@ -1,15 +1,18 @@
 # DevOps_project
 
+## Project Daigram
+![project](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/Project_Diagram.png)
 ## infrastructure on AWS
 ![aws_infra](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/aws_public.png)
 
-# Prequsits
+
+## Prequsits
 - awscli configured
 - Python, Terraofmr and Ansible installed
 - GitHub account
 - Slack account with namespace that has Jenkins CI configured in it 
 #### [To configure Jenkins CI on slack](https://slack.com/apps/A0F7VRFKN-jenkins-ci)
-## Jenkins Plugins:
+## Installed Jenkins Plugins:
 Note: this plugins is installed using Plugin Installation Manager by Ansible inside the python code
 - Maven Integration plugin
 - Oracle Java SE Development Kit Installer Plugin
@@ -29,6 +32,8 @@ cd DevOps_project
 python main.py
 ```
 Note: Python script will output jenkins password and nexus password after the infrastructure is built and configured
+## Example of the python output:
+![output](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/final.png)
 #### on Jenkins:
 - sign in using the password that the python script outputed
 - Create Credentials:
@@ -61,5 +66,4 @@ Note: Python script will output jenkins password and nexus password after the in
 - From project settings select configure webhook then create a webhook with anyname and the url: http://{your jenkins private ip}:8080/sonarqube-webhook
 
 #### on github 
-- create a webhook from the forked repo to your jenkins ip.
-
+- create a webhook from the forked repo to your jenkins ip (http://{your jenkins ip}/github-webhook/)
