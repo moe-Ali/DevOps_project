@@ -12,7 +12,7 @@ pipeline {
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
         NEXUS_GRP_REPO = 'devops_project-group'
-        NEXUSIP = '10.0.0.4' // Nexus Server Private IP
+        NEXUSIP = '10.0.0.98' // Nexus Server Private IP
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
