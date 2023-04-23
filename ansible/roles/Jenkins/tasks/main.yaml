@@ -53,10 +53,7 @@
   shell: snap install helm --classic
 
 - name: Install kubectl snap package
-  snap:
-    name: kubectl
-    classic: yes
-    state: present
+  command: snap install kubectl --classic --channel=1.26/stable
 
 - name: Get IP address of Nexus server
   set_fact:
