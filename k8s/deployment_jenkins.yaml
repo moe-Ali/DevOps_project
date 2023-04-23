@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: java_app
-        image: ${NEXUSIP}:5000/devops_project:${BUILD_NUMBER}
+        image: ${NEXUS_IP}:5000/devops_project:${BUILD_NUMBER}
         resources:
           limits: {}
         ports:
