@@ -5,6 +5,20 @@
 ## infrastructure on AWS
 ![aws_infra](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/aws_public.png)
 
+## GitHub Branches
+main branch containes:
+- Python code which uses Ansible and Terraform for configuring and building infrastructure on AWS and outputting the servers IPs, Jenkins Password and Nexus Password
+- Terraform code which contains 3 models and use them to build the infrastructure on AWS
+- Ansible code which contains 4 roles and uses them to Configure the infrastructure on AWS
+
+ci branch contains:
+- Java web application source code
+- Dockerfile to build docker image from this source code
+- Jenkinsfile for Continuous integration pipeline
+
+cd branch contains:
+- Kubernetes YAML files (Java application, Nginx ingress, ArgoCD)
+- Jenkinsfile for Continuous Delivery pipeline
 
 ## Prequsits
 - awscli configured
@@ -32,7 +46,7 @@ cd DevOps_project
 python main.py
 ```
 Note: Python script will output jenkins password and nexus password after the infrastructure is built and configured
-#### Example of the python output:
+## Example of the python output:
 ![output](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/final.png)
 #### on Jenkins:
 - sign in using the password that the python script outputed
@@ -54,6 +68,10 @@ Note: Python script will output jenkins password and nexus password after the in
 #### on Nexus:
 - sign in using username admin and password that the python script outputed
 - go to conigration then select repository:
+    - Create repository Maven2 (hosted) and name it devops_project-release
+    - Create repository Maven2 (hosted) and name it devops_project-snapshot
+    - Create repository Maven2 (proxy) and name it devops_project-central
+    - Create repository Maven2 (group) and name it devops_project-group and add devops_project-release, devops_project-snapshot, devops_project-central
     - Create repository Docker (hosterd) and name it anything and make it accessible on HTTP port 5000
 
 #### run the pipeline manauly, it will abort due to a SonarQube webhook not being configured
