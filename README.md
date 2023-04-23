@@ -19,7 +19,7 @@ ci branch contains:
 cd branch contains:
 - Kubernetes YAML files (Java application, Nginx ingress, ArgoCD)
 - Jenkinsfile for Continuous Delivery pipeline
-
+- Bash script that the Jenkinsfile will use to deploy Prometheus, Grafana and ArgoCD
 ## Prequsits
 - awscli configured
 - Python, Terraofmr and Ansible installed
