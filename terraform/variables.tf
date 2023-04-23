@@ -41,3 +41,6 @@ variable "keypair" {
   type = string
 }
 
+variable "allow_ip" {
+  type = string
+}

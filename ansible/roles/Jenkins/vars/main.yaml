@@ -1,2 +1,3 @@
-apt_install : [openjdk-11-jdk,openjdk-8-jdk,docker.io,awscli,gnupg,gettext-base,git]
+apt_install : [openjdk-11-jdk,openjdk-8-jdk,docker.io,awscli,gnupg,gettext-base,git ]
 jenkins_repo_url : https://pkg.jenkins.io/debian/jenkins.io-2023.key
+nexus_docker_port : 5000

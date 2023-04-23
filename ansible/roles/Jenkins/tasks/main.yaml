@@ -43,7 +43,7 @@
 - name: install jenkins plugins
   shell: java -jar /opt/jenkins-plugin-manager-*.jar --war /usr/share/java/jenkins.war -d /var/lib/jenkins/plugins -f /opt/plugins.txt
 
-- name: restart the service
+- name: restart Jenkins service
   service:
     state: restarted
     name: jenkins.service 
@@ -51,3 +51,39 @@
     
 - name: install helm
   shell: snap install helm --classic
+
+- name: Install kubectl snap package
+  snap:
+    name: kubectl
+    classic: yes
+    state: present
+
+- name: Get IP address of Nexus server
+  set_fact:
+    nexus_ip: "{{ hostvars['nexus_server']['ansible_host'] }}"
+
+- name: Create daemon.json file
+  file:
+    path: /etc/docker/daemon.json
+    state: touch
+
+- name: Allow access to Nexus Docker repo
+  lineinfile:
+    dest: /etc/docker/daemon.json
+    line: "{{ item }}"
+  loop:
+  - '{' 
+  - '"insecure-registries":["{{ nexus_ip }}:{{ nexus_docker_port }}"]'
+  - '}'
+
+- name: restart Docker service
+  service:
+    state: restarted
+    name: docker.service 
+    enabled: true
+
+
+- name: Set permissions on /var/lib/docker.socket
+  file:
+    path: /var/run/docker.sock
+    mode: '0666'

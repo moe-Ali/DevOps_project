@@ -4,6 +4,8 @@ project_tag = "DevOps_project"
 
 vpc_id = "10.0.0.0/16"
 
+allow_ip = "0.0.0.0/0"
+
 #public1_subnet is used for jenkins_server, nexus_server, sonarqube_server and k8s nodes
 public1_subnet = {
   az = "us-east-1a"
