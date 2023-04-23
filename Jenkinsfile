@@ -12,6 +12,7 @@ pipeline {
         steps {
             withCredentials([usernamePassword(credentialsId: "awslogin", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                 sh """
+                aws s3 ls
                 aws eks update-kubeconfig --region us-east-1 --name DevOps_project-cluster
                 """
             }
