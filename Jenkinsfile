@@ -62,7 +62,6 @@ pipeline {
                 echo "This is push stage number ${BUILD_NUMBER}"
                 withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
-                    docker push ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER}
                     echo ${BUILD_NUMBER} > ../image_number.txt
                     echo ${NEXUSIP} > ../nexus_ip.txt
                 """
