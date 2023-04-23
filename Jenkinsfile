@@ -12,7 +12,7 @@ pipeline {
         CENTRAL_REPO ='devops_project-central'
         SNAP_REPO ='devops_project-snapshot'
         NEXUS_GRP_REPO = 'devops_project-group'
-        NEXUSIP = '44.202.42.100'
+        NEXUSIP = '10.0.0.4' // Nexus Server Private IP
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
@@ -64,6 +64,7 @@ pipeline {
                 sh """
                     docker push ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER}
                     echo ${BUILD_NUMBER} > ../image_number.txt
+                    echo ${NEXUSIP} > ../nexus_ip.txt
                 """
                 }
             }
