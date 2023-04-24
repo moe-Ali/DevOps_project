@@ -69,7 +69,7 @@
     dest: /etc/docker/daemon.json
     line: "{{ item }}"
   loop:
-  - '{' 
+  - ':w{' 
   - '"insecure-registries":["{{ nexus_ip }}:{{ nexus_docker_port }}"]'
   - '}'
 
