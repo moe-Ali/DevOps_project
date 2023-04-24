@@ -50,10 +50,10 @@
     enabled: true
     
 - name: install helm
-  shell: snap install helm --classic
+  shell: snap install helm --classic --channel=3.7/stable 
 
 - name: Install kubectl snap package
-  command: snap install kubectl --classic --channel=1.26/stable
+  command: snap install kubectl --classic --channel=1.23/stable
 
 - name: Get IP address of Nexus server
   set_fact:
@@ -69,7 +69,7 @@
     dest: /etc/docker/daemon.json
     line: "{{ item }}"
   loop:
-  - ':w{' 
+  - '{' 
   - '"insecure-registries":["{{ nexus_ip }}:{{ nexus_docker_port }}"]'
   - '}'
 

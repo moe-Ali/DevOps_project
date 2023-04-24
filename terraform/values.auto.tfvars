@@ -18,12 +18,12 @@ public2_subnet = {
   cidr = "10.0.1.0/24"
 }
 
-eks_worker_instance_types_list = ["t2.micro"]
+eks_worker_instance_types_list = ["t2.medium"]
 
 scaling_config = {
-  desired_size = 1
-  max_size = 2
-  min_size = 1
+  desired_size = 2
+  max_size = 3
+  min_size = 2
 }
 
 #ec2 keypair would be downloaded localy in the keypair folder
