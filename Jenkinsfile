@@ -8,11 +8,8 @@ pipeline {
     }
 
     environment {
-        RELEASE_REPO = 'devops_project-release'
-        CENTRAL_REPO ='devops_project-central'
-        SNAP_REPO ='devops_project-snapshot'
-        NEXUS_GRP_REPO = 'devops_project-group'
-        NEXUSIP = '18.212.65.9'
+        NEXUS_GRP_REPO = 'maven-public'
+        NEXUSIP = '3.84.119.101'
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
