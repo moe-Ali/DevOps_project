@@ -1,8 +1,7 @@
-FROM tomcat
-RUN apt update && apt install -y openjdk-8-jdk maven
-COPY . /tmp
+FROM tomcat:8-jre11
+
 RUN rm -rf /usr/local/tomcat/webapps/* 
-RUN mv /tmp/target/devops_project.war /usr/local/tomcat/webapps/ROOT.war
+COPY target/devops_project.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 8080
 CMD ["catalina.sh","run"]
