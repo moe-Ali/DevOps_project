@@ -6,8 +6,8 @@ else
     # Install ArgoCD
     kubectl create namespace argocd
     kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-    kubectl port-forward -n argocd svc/argocd-server 8080:443
-    kubectl apply -f application.yaml
+    sleep 600
+    kubectl apply -f argo.yaml
 
     # Adding Helm Repos
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
