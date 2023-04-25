@@ -18,3 +18,5 @@ spec:
           limits: {}
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+        - name: nexus
