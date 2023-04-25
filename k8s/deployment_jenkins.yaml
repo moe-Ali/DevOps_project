@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: java_app_deployment
+  name: java-app-deployment
 spec:
   selector:
     matchLabels:
-      app: java_app
+      app: java-app
   template:
     metadata:
       labels:
-        app: java_app
+        app: java-app
     spec:
       containers:
-      - name: java_app
+      - name: java-app
         image: ${NEXUS_IP}:5000/devops_project:${BUILD_NUMBER}
         resources:
           limits: {}

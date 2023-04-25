@@ -1,9 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app_ingress
+  name: app-ingress
   labels:
-    name: java_app
+    name: java-app
 spec:
   rules:
   - http:
@@ -12,6 +12,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: java_app_service
+            name: java-app-service
             port: 
               number: 8080
