@@ -39,7 +39,9 @@ pipeline {
     }
     stage('Install ArgoCD Prometheusand Gerafana') {
         steps {
-          withCredentials([usernamePassword(credentialsId: "awslogin", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+          withCredentials([
+            usernamePassword(credentialsId: "awslogin", usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')
+            usernamePassword(credentialsId: "nexuslogin", usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
             sh """
             chmod +x script.sh
             bash script.sh
