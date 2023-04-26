@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         NEXUS_GRP_REPO = 'maven-public'
-        NEXUSIP = '3.84.119.101'
+        NEXUSIP = '3.95.213.229'
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
         NEXUS_LOGIN = 'nexuslogin' 
