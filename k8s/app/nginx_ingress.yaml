@@ -4,6 +4,8 @@ metadata:
   name: app-ingress
   labels:
     name: java-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
