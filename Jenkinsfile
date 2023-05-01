@@ -12,6 +12,7 @@ pipeline {
         NEXUSIP = '3.95.213.229'
         NEXUSPORT= '8081'
         DOCKER_NEXUS_PORT = '5000'
+        NEXUSDNS= 'test-nexus.duckdns.org'
         NEXUS_LOGIN = 'nexuslogin' 
         SONARSERVER = 'sonarserver' 
         SONARSCANNER = 'sonarscanner'
@@ -48,8 +49,8 @@ pipeline {
                 echo "This is build stage number ${BUILD_NUMBER}"
                 withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
-                    docker login --username ${NEXUS_USER} --password ${NEXUS_PASSWORD} http://${NEXUSIP}:${DOCKER_NEXUS_PORT}
-                    docker build -t ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER} .
+                    docker login --username ${NEXUS_USER} --password ${NEXUS_PASSWORD} ${NEXUSDNS}
+                    docker build -t ${NEXUSDNS}/devops_project:${BUILD_NUMBER} .
                 """
                 }
             }
@@ -59,9 +60,9 @@ pipeline {
                 echo "This is push stage number ${BUILD_NUMBER}"
                 withCredentials([usernamePassword(credentialsId: "${NEXUS_LOGIN}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
                 sh """
-                    docker push ${NEXUSIP}:${DOCKER_NEXUS_PORT}/devops_project:${BUILD_NUMBER}
+                    docker push ${NEXUSDNS}/devops_project:${BUILD_NUMBER}
                     echo ${BUILD_NUMBER} > ../image_number.txt
-                    echo ${NEXUSIP} > ../nexus_ip.txt
+                    echo ${NEXUSDNS} > ../nexus_dns.txt
                 """
                 }
             }
