@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app-deployment
+spec:
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      containers:
+      - name: java-app
+        image: test-nexus.duckdns.org/devops_project:6
+        resources:
+          limits: {}
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: nexus
