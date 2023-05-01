@@ -23,7 +23,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: "githublogin", usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
           sh """
           export BUILD_NUMBER=\$(cat ../image_number.txt)
-          export NEXUS_IP=\$(cat ../nexus_ip.txt)
+          export NEXUS_DNS=\$(cat ../nexus_dns.txt)
           [ -e "k8s/app/deployment.yaml" ] && rm -f "k8s/app/deployment.yaml"
           cp k8s/deployment_jenkins.yaml k8s/app/deployment.yaml.tmp
           cat k8s/app/deployment.yaml.tmp | envsubst > k8s/app/deployment.yaml
