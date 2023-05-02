@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: java-app
-        image: test-nexus.duckdns.org/devops_project:6
+        image: test-nexus.duckdns.org/devops_project:7
         resources:
           limits: {}
         ports:
