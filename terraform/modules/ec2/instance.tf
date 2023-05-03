@@ -3,9 +3,12 @@ resource "aws_instance" "ec2" {
   instance_type = var.ec2_instance_type
   key_name = var.ec2_instance_keypair
   associate_public_ip_address = var.associate_public_ip_address
-
   subnet_id     = var.ec2_subnet_id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+
+  root_block_device {
+    volume_size = var.ebs_volume
+  }
 
   tags = {
     "Name" = var.ec2_name

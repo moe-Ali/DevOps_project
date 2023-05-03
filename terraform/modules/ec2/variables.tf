@@ -22,6 +22,9 @@ variable "ec2_subnet_id" {
   type = string
 }
 
+variable "ebs_volume" {
+  type = string
+}
 #EC2 ami
 variable "ec2_ami" {
   type = object({

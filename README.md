@@ -68,11 +68,11 @@ Note: Python script will output jenkins password and nexus password after the in
 #### on Nexus:
 - sign in using username admin and password that the python script outputed
 - go to conigration then select repository:
-    - Create repository Maven2 (hosted) and name it devops_project-release
-    - Create repository Maven2 (hosted) and name it devops_project-snapshot
-    - Create repository Maven2 (proxy) and name it devops_project-central
-    - Create repository Maven2 (group) and name it devops_project-group and add devops_project-release, devops_project-snapshot, devops_project-central
     - Create repository Docker (hosterd) and name it anything and make it accessible on HTTP port 5000
+- Configure DNS for the Nexus server (I used duckdns)
+- Configure Nginx proxy for the Nexus Docker repository
+- Configure SSL/TLS for Nginx (I used lets Encrypt)
+- Change the environment values in the ci Jenkinsfile
 
 #### run the pipeline manauly, it will abort due to a SonarQube webhook not being configured
 #### on SonarQube:

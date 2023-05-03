@@ -60,4 +60,8 @@
     state: started
     name: nexus
     enabled: true
+
+- name: install nginx and lets encrypt bot for SSL/TLS
+  apt:
+    name: [nginx,certbot,python3-certbot-nginx]
     

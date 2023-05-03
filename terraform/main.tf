@@ -38,6 +38,7 @@ module "jenkins_server" {
           owners = ["amazon"]
         }
         ec2_instance_type = "t2.medium"
+        ebs_volume = 8
         ec2_instance_keypair = var.keypair
         associate_public_ip_address = true
         ec2_subnet_id = module.network.subnet_id["public1"] 
@@ -64,6 +65,7 @@ module "nexus_server" {
           owners = ["amazon"]
         }
         ec2_instance_type = "t2.medium"
+        ebs_volume = 14
         ec2_instance_keypair = var.keypair
         associate_public_ip_address = true
         ec2_subnet_id = module.network.subnet_id["public1"] 
@@ -72,6 +74,8 @@ module "nexus_server" {
         sg_name = "nexus_server_securitygroup"
         sg_rules = {
           "port 22" = { type ="ingress",port ="22",protocol ="tcp",cidr_blocks =["154.181.24.109/32"]}
+          "port 80" = { type ="ingress",port ="80",protocol ="tcp",cidr_blocks =["0.0.0.0/0"]}
+          "port 443" = { type ="ingress",port ="443",protocol ="tcp",cidr_blocks =["0.0.0.0/0"]}
           "port 8081" = { type ="ingress",port ="8081",protocol ="tcp",cidr_blocks =[var.allow_ip]}
           "port 5000" = { type ="ingress",port ="5000",protocol ="tcp",cidr_blocks =["0.0.0.0/0"]}
           "egress all" = { type ="egress",port ="0",protocol ="-1",cidr_blocks =["0.0.0.0/0"]}
@@ -89,6 +93,7 @@ module "sonarqube_server" {
           owners = ["amazon"]
         }
         ec2_instance_type = "t2.medium"
+        ebs_volume = 8
         ec2_instance_keypair = var.keypair
         associate_public_ip_address = true
         ec2_subnet_id = module.network.subnet_id["public1"] 

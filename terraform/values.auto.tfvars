@@ -21,9 +21,9 @@ public2_subnet = {
 eks_worker_instance_types_list = ["t2.medium"]
 
 scaling_config = {
-  desired_size = 2
-  max_size = 3
-  min_size = 2
+  desired_size = 1
+  max_size = 2
+  min_size = 1
 }
 
 #ec2 keypair would be downloaded localy in the keypair folder
