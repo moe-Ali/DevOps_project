@@ -3,7 +3,7 @@
 ## [Demo Video](https://drive.google.com/file/d/1S4w3sdd9qeTL-0ScwHiRtRmo_qdf39cr/view?usp=sharing)
 ## Project Daigram
 ![project](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/Project_Diagram.png)
-## infrastructure on AWS
+## Infrastructure on AWS
 ![aws_infra](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/aws_public.png)
 
 ## GitHub Branches
