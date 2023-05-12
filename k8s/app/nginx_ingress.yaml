@@ -7,6 +7,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
   - http:
       paths:
@@ -17,22 +18,3 @@ spec:
             name: java-app-service
             port: 
               number: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
- name: nginx-ingress-nlb
- annotations:
-   service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
-   service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
-   service.beta.kubernetes.io/aws-load-balancer-type: nlb
-spec:
-   externalTrafficPolicy: Local
-   type: LoadBalancer
-   ports:
-   - port: 80
-     targetPort: 8080
-     protocol: TCP
-     name: http
-   selector:
-     app: java-app
