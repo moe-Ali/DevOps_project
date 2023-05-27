@@ -47,7 +47,7 @@ cd DevOps_project
 python main.py
 ```
 Note: Python script will output jenkins password and nexus password after the infrastructure is built and configured
-## Example of the python output:
+#### Example of the python output:
 ![output](https://github.com/moe-Ali/DevOps_project/blob/main/screenshots/final.png)
 #### on Jenkins:
 - sign in using the password that the python script outputed
